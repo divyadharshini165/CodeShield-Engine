@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   CodeShield Design System -- "Cyber Purple Shield"
+   Default: ultra-dark charcoal/near-black developer theme with vibrant
+            Cyber Purple accents (#9b6bd5 / #a855f7), emerald success,
+            crimson danger.
+   Toggle:  crisp, high-contrast corporate light theme with the same
+            purple accent family for cohesion (Leaderboard, Admin, AI panels).
+   Theme switching is driven by a `data-theme="light"` attribute on <html>.
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  --shield-bg: #060509;
+  --shield-bg-elevated: #0d0b14;
+  --shield-bg-panel: #131019;
+  --shield-bg-inset: #030205;
+
+  --shield-border: #241f30;
+  --shield-border-strong: #3a3147;
+  --shield-border-glow: rgba(168, 85, 247, 0.4);
+
+  --shield-text-primary: #f3f1f7;
+  --shield-text-secondary: #a79fb8;
+  --shield-text-muted: #6b6379;
+
+  --shield-accent: #a855f7;
+  --shield-accent-strong: #9b6bd5;
+
+  --shield-success: #10b981;
+  --shield-success-bg: rgba(16, 185, 129, 0.1);
+  --shield-success-border: rgba(16, 185, 129, 0.3);
+
+  --shield-danger: #f43f5e;
+  --shield-danger-bg: rgba(244, 63, 94, 0.1);
+  --shield-danger-border: rgba(244, 63, 94, 0.3);
+
+  --shield-warning: #f59e0b;
+  --shield-warning-bg: rgba(245, 158, 11, 0.1);
+  --shield-warning-border: rgba(245, 158, 11, 0.3);
+
+  --shield-shadow: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] {
+  --shield-bg: #f6f4fb;
+  --shield-bg-elevated: #ffffff;
+  --shield-bg-panel: #ffffff;
+  --shield-bg-inset: #efebf7;
+
+  --shield-border: #e3ddf0;
+  --shield-border-strong: #cbbfe3;
+  --shield-border-glow: rgba(168, 85, 247, 0.3);
+
+  --shield-text-primary: #1c1626;
+  --shield-text-secondary: #5d5470;
+  --shield-text-muted: #9a90ad;
+
+  --shield-accent: #9333ea;
+  --shield-accent-strong: #7e22ce;
+
+  --shield-success: #059669;
+  --shield-success-bg: rgba(5, 150, 105, 0.08);
+  --shield-success-border: rgba(5, 150, 105, 0.25);
+
+  --shield-danger: #dc2626;
+  --shield-danger-bg: rgba(220, 38, 38, 0.08);
+  --shield-danger-border: rgba(220, 38, 38, 0.25);
+
+  --shield-warning: #d97706;
+  --shield-warning-bg: rgba(217, 119, 6, 0.08);
+  --shield-warning-border: rgba(217, 119, 6, 0.25);
+
+  --shield-shadow: rgba(168, 85, 247, 0.15);
+}
+
+@theme {
+  --color-shield-bg: var(--shield-bg);
+  --color-shield-bg-elevated: var(--shield-bg-elevated);
+  --color-shield-bg-panel: var(--shield-bg-panel);
+  --color-shield-bg-inset: var(--shield-bg-inset);
+
+  --color-shield-border: var(--shield-border);
+  --color-shield-border-strong: var(--shield-border-strong);
+
+  --color-shield-text: var(--shield-text-primary);
+  --color-shield-text-secondary: var(--shield-text-secondary);
+  --color-shield-text-muted: var(--shield-text-muted);
+
+  --color-shield-accent: var(--shield-accent);
+  --color-shield-accent-strong: var(--shield-accent-strong);
+
+  --color-shield-success: var(--shield-success);
+  --color-shield-success-bg: var(--shield-success-bg);
+  --color-shield-success-border: var(--shield-success-border);
+
+  --color-shield-danger: var(--shield-danger);
+  --color-shield-danger-bg: var(--shield-danger-bg);
+  --color-shield-danger-border: var(--shield-danger-border);
+
+  --color-shield-warning: var(--shield-warning);
+  --color-shield-warning-bg: var(--shield-warning-bg);
+  --color-shield-warning-border: var(--shield-warning-border);
+
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--shield-bg);
+  color: var(--shield-text-primary);
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Subtle ambient grid texture behind the dark dashboard */
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 20% -10%, rgba(168, 85, 247, 0.12), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(155, 107, 213, 0.07), transparent 35%);
+  background-attachment: fixed;
+}
+
+/* Glowing accent border utility -- used for focused / active shield panels */
+.shield-glow {
+  box-shadow: 0 0 0 1px var(--shield-border-glow), 0 0 24px -8px var(--shield-border-glow);
+}
+
+/* Scrollbar styling for the dark workspace */
+.shield-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.shield-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.shield-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--shield-border-strong);
+  border-radius: 999px;
+}
+
+/* Verdict pulse animation for the live judging state */
+@keyframes shield-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.animate-shield-pulse {
+  animation: shield-pulse 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shield-pulse {
+    animation: none;
+  }
+}

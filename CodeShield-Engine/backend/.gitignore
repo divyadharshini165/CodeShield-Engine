@@ -1,0 +1,7 @@
+node_modules
+.env
+execute/codes_dir/*
+!execute/codes_dir/.gitkeep
+*.log
+npm-debug.log*
+.DS_Store
