@@ -10,11 +10,12 @@ FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Python 3, Node.js, GCC/G++, a headless JDK, and Bash.
+# Install Python 3, Node.js, NPM (explicitly required on Debian), GCC/G++, a headless JDK, and Bash.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         python3 \
         nodejs \
+        npm \
         gcc \
         g++ \
         default-jdk-headless \
