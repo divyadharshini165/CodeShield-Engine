@@ -127,7 +127,7 @@ module.exports = [
                 "expectedOutput": "false"
             },
             {
-                "input": "",
+                "input": " ",
                 "expectedOutput": "true"
             }
         ]
@@ -699,7 +699,7 @@ module.exports = [
                 "expectedOutput": "3"
             },
             {
-                "input": "",
+                "input": " ",
                 "expectedOutput": "0"
             },
             {

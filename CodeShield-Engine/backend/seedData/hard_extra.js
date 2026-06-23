@@ -56,11 +56,11 @@ module.exports = [
             },
             {
                 "input": "0",
-                "expectedOutput": ""
+                "expectedOutput": "EMPTY"
             },
             {
                 "input": "2\n0\n0",
-                "expectedOutput": ""
+                "expectedOutput": "EMPTY"
             },
             {
                 "input": "4\n1 10\n1 -5\n1 0\n1 7",
@@ -120,7 +120,7 @@ module.exports = [
             },
             {
                 "input": "a\naa",
-                "expectedOutput": ""
+                "expectedOutput": "EMPTY" // Fixed: changed "" to " "
             },
             {
                 "input": "aa\naa",

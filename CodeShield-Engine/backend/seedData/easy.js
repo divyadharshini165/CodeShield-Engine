@@ -1263,7 +1263,7 @@ module.exports = [
                 "expectedOutput": "false"
             },
             {
-                "input": "",
+                "input": " ",
                 "expectedOutput": "true"
             }
         ]

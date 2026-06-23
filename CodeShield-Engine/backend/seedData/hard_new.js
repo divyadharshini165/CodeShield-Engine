@@ -123,11 +123,11 @@ module.exports = [
                 "expectedOutput": "1.0"
             },
             {
-                "input": "0 2\n\n1 2",
+                "input": "0 2\n1 2",
                 "expectedOutput": "1.5"
             },
             {
-                "input": "3 0\n1 2 3\n",
+                "input": "3 0\n1 2 3",
                 "expectedOutput": "2.0"
             }
         ]
