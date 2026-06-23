@@ -63,3 +63,26 @@ CodeShield-Engine/
 │   ├── server.js               # Primary Express API entry point
 │   └── seed.js                 # Programmatic cloud database seeding engine
 └── frontend/                   # React web application workspace
+```
+## ▶️ Run Application (Local Setup)
+
+### 1️⃣ Start Backend
+```bash
+cd CodeShield-Engine/backend
+npm install
+node server.js
+```
+### 2️⃣ Start Frontend (New Terminal)
+```bash
+cd CodeShield-Engine/frontend
+npm install
+npm start
+```
+
+## 🌍 Deployment
+- Frontend: Vercel
+- Backend: Render
+
+## 👨‍💻 Author
+
+K Divyadharshini
