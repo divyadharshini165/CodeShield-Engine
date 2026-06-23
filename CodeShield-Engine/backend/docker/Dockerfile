@@ -1,21 +1,16 @@
 # =============================================================================
 # CodeShield Multilingual Runner Image & Deployment Build
-# -----------------------------------------------------------------------------
-# A lightweight sandbox image containing the toolchains for every language in
-# CodeShield's execution matrix: Python 3, Node.js (JavaScript), GCC/G++ (C/C++),
-# a JDK (Java), and Bash.
 # =============================================================================
 
 FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Python 3, Node.js, NPM (explicitly required on Debian), GCC/G++, a headless JDK, and Bash.
+# 1. Install system utilities, Python, GCC, Java, and curl
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        curl \
         python3 \
-        nodejs \
-        npm \
         gcc \
         g++ \
         default-jdk-headless \
@@ -24,7 +19,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# A dedicated, unprivileged user that owns nothing outside /sandbox.
+# 2. Safely inject NodeSource production repository for Node.js v20 (LTS) & NPM
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
+# A dedicated, unprivileged user that owns nothing outside /sandbox
 RUN useradd -m -u 10001 -s /bin/bash runner
 
 # /sandbox is the mount point for the per-submission working directory
@@ -37,18 +37,17 @@ WORKDIR /sandbox
 # DEPLOYMENT EXTENSION: Overriding the runner to boot the Express API Server
 # =============================================================================
 
-# 1. Switch to root temporarily to move the production application files
 USER root
 
-# 2. Copy all your backend directory files into a new application folder
+# Copy all your backend directory files into a new application folder
 COPY . /app
 WORKDIR /app
 
-# 3. Install the Express backend node_modules dependencies
+# Install the Express backend node_modules dependencies
 RUN npm install
 
-# 4. Expose the standard Render web service application port
+# Expose the standard Render web service application port
 EXPOSE 10000
 
-# 5. Tell the container to boot your actual server.js script and keep it alive
+# Tell the container to boot your actual server.js script and keep it alive
 CMD ["node", "server.js"]
